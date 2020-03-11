@@ -1,0 +1,16 @@
+@media screen and (min-width:600px) and (max-width:889px){#logo_mini img{margin-top:20px !important;width:auto !important;height:50px !important;}
+#panelmenuatas,.codropsmenu1,#topbar .breadcrumbs{display:none;}
+#topbar #data-sensus{width:50%;margin-top:-5px;}
+#topbar #data-sensus table{width:auto !important;margin:auto 2% auto auto;}
+#topbar #data-sensus #list-sensus ul{top:90px !important;}
+#sidebar, #sidebar .linked-banner-button,.menubawah, .logo{display:none;}
+#content{width:100%;margin-top:0px;}
+#column2{width:98%;}
+#column2.kolom-non-index{border:1px solid #DDD;padding:15px 2% 5px;}
+#column2 h4.judulberita{margin:0px 0px 20px 0px;font-family:Geneva, Arial;color:#00497d;font-weight:bold;}
+#sb-site{min-height:450px !important;height:auto;}
+#topbar{margin:0px 0px 0px 0px;}
+.container{margin-top:-20px !important;width:100% !important;}
+.row{margin-right:0px !important;margin-left:0px !important;}
+footer .row{line-height:12px !important;}
+}

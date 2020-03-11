@@ -1,0 +1,9 @@
+@media screen and (min-width:1200px) and (max-width:1449px){#sb-site{width:85% !important;left:7.5% !important;right:7.5% !important;}
+.navbar{width:85% !important;left:7.5% !important;right:7.5% !important;}
+}
+@media screen and (min-width:1450px) and (max-width:1799px){#sb-site{width:80% !important;left:10% !important;right:10% !important;}
+.navbar{width:80% !important;left:10% !important;right:10% !important;}
+}
+@media screen and (min-width:1800px){#sb-site{width:75% !important;left:12.5% !important;right:12.5% !important;}
+.navbar{width:75% !important;left:12.5% !important;right:12.5% !important;}
+}

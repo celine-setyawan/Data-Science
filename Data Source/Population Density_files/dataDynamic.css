@@ -1,0 +1,114 @@
+                                /* 
+    Document   : dataDynamic.css
+    Created on : Apr 10, 2014, 9:14:35 AM
+    Author     : ode
+    Description:
+        Purpose of the stylesheet follows.
+*/
+h2{
+    font-family: sans-serif;
+    font-size: 25pt;
+    font-weight: bold;
+    font-kerning: auto;
+    font-variant-numeric: lining-nums;
+}
+
+#pembatas{
+    background-color: #6da2f7; 
+    margin-top: 10px;
+}
+
+root { 
+    display: block;
+}
+h4{
+    margin-bottom: 5px;
+}
+hr{
+    margin-bottom: 4px;
+    color: #0099cc;
+    background-color: #0099cc;
+    height: 2px;
+}
+h3{
+    font-size: 12pt;
+    margin: 2px;
+    font-family: arial;
+    color: #10007D;
+}
+#keterangan{
+    font-style: italic;
+    font-size: 10pt;
+    color: brown;
+    font-family: arial;
+}
+select{
+    width: 200px;
+}
+legend{
+    /*    font-style: oblique;*/
+    font-family: arial;
+    font-size: 10pt;
+    color: darkgreen;
+}
+td#ketPil{
+    padding-top: 5px;
+    font-family: inherit;
+    font-style: oblique;
+    font-size: 11pt;
+    font-weight: bolder;
+}
+td#ketPil.top{
+    padding-top: 0px;
+
+}
+
+table#table-result{
+    font-family: Calibri,sans-serif;
+    font-size: 9pt;
+    border:1px solid;
+}
+th td {
+    border: 0.1px solid;
+}
+
+td#right{
+    text-align: right;
+}
+th {
+    background-color:#0a0338; 
+    color: white
+}
+td#left {
+    background-color:#e7e7e7; 
+    color: black
+}
+#bttAdd, #bttRemove, #bttReset, #bttSubmit{
+    font-size: 10pt;
+    font-family: Tahoma;
+    margin-bottom: 7px;
+    padding: 4px;
+    border: 3px outset #ECECEC;
+    background: none repeat scroll 0% 0% #06518A;
+    color: #FFF;
+    border-radius: 10px;
+}
+#bttAdd:hover, #bttRemove:hover, #bttReset:hover, #bttSubmit:hover{
+    background: none repeat scroll 0% 0% dodgerblue;
+}
+#bttAdd:active, #bttRemove:active, #bttReset:active, #bttSubmit:active{
+    background: none repeat scroll 0% 0% dodgerblue;
+    border: 3px inset #ECECEC;
+}
+
+#dataSelect fieldset, #tableWilayah fieldset{
+    border: 1px solid #c0c0c0;
+    margin: 0px 2px;
+    padding: 0.35em 0.625em 0.75em;    
+}
+#dataSelect legend, #tableWilayah legend{
+    width: initial;
+    border-bottom:  none;
+    margin-bottom: 0px;    
+}
+                            

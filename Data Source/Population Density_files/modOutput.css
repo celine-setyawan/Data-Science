@@ -1,0 +1,361 @@
+/* 
+    Document   : modOutput
+    Created on : 12-Jun-2014, 08:02:42
+    Author     : toshiba
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/*
+ * mod by Hanif
+ */
+
+/*new css*/
+#dataDynamic, #dataDynamic *, #dataDynamic *:before, #dataDynamic *:after {
+    box-sizing: content-box;
+    line-height:1;
+}
+#outputContent td, #isi{
+    margin: 0px;
+    font-family: Geneva,Arial;
+    color: #000;
+    font-size: 9pt;
+}
+/*new css*/
+
+/*====css download button=======*/
+#showUnduhMenu{
+    margin-top: 0px;
+    padding: 0px 10px 10px 0px;
+    width: 300px;
+    z-index: 10; 
+    position: absolute;    
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3); 
+    background: whitesmoke;
+    border-top: 1px solid #F6F4F5;
+    border-left: 1px solid #F6F4F5;
+    border-right: 1px solid #F6F4F5;
+    border-color: #F6F4F5;
+    border-radius: 0px 3px 3px;
+    box-shadow: 2px 4px 7px rgba(0, 0, 0, 0.5);
+}
+#showUnduhMenu ul{
+    list-style-type: none;
+    padding-left: 15px;    
+}
+#showUnduhMenu ul li{
+    margin-top: 10px;
+}
+.unduhBtn{
+    cursor: pointer;
+    text-align: center;     
+    padding: 4px; 
+    background: #00ADEE -moz-linear-gradient(center top , #00ADEE, #0078A5);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#00adee), to(#0078a5));; 
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3); 
+    box-shadow: 0px 1px rgba(255, 255, 255, 0.4) inset, 1px 0px rgba(255, 255, 255, 0.1) inset, -1px 0px rgba(255, 255, 255, 0.1) inset;
+}
+.unduhBtn:hover, .chartBtn:hover, .mapBtn:hover,.tabelBtn:hover{
+    opacity: 0.7;
+}
+.unduhBtn.icon{   
+    height: 20px;     
+    border: 1px solid #0078A5;
+}
+.unduhBtn.text{
+    color: white; 
+    width: 120px; 
+    height: 20px; 
+    font-size: 12pt; 
+    border-radius: 0px 0px 12.5px 0px;     
+    border: 1px solid #0078A5;
+    font-weight: bold;
+}
+
+.chartBtn{
+    cursor: pointer;
+    text-align: center;     
+    padding: 4px; 
+    background: #7db72f -moz-linear-gradient(top,  #7db72f,  #4e7d0e);
+    background-image:  -webkit-gradient(linear, left top, left bottom, from(#7db72f), to(#4e7d0e));
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3); 
+    box-shadow: inset 0 1px rgba(255,255,255, .4), inset 1px 0 rgba(255,255,255, .1), inset -1px 0 rgba(255,255,255, .1);
+}
+.chartBtn.icon{
+    height: 20px;     
+    border: 1px solid yellowgreen;
+}
+.chartBtn.text{
+    color: white; 
+    width: 65px; 
+    height: 20px; 
+    font-size: 12pt; 
+    border-radius: 0px 0px 12.5px 0px;     
+    border: 1px solid yellowgreen;
+    font-weight: bold;
+}
+
+.mapBtn{
+    cursor: pointer;
+    text-align: center;     
+    padding: 4px; 
+    background-color: #faa51a;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#faa51a), to(#f47a20));
+    background-image: -moz-linear-gradient(top,  #faa51a,  #f47a20);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#faa51a', endColorstr='#f47a20');
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3); 
+    box-shadow: inset 0 1px rgba(255,255,255, .4), inset 1px 0 rgba(255,255,255, .1), inset -1px 0 rgba(255,255,255, .1);
+}
+.mapBtn.icon{
+    height: 20px;     
+    border: 1px solid orange;
+}
+.mapBtn.text{
+    color: white; 
+    width: 85px; 
+    height: 20px; 
+    font-size: 12pt; 
+    border-radius: 0px 0px 12.5px 0px;     
+    border: 1px solid orange;
+    font-weight: bold;
+}
+
+.tabelBtn{
+    cursor: pointer;
+    text-align: center;     
+    padding: 4px; 
+    background-color: navy;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(darkblue), to(navy));
+    background-image: -moz-linear-gradient(top,  darkblue,  navy);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='darkblue', endColorstr='navy');
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3); 
+    box-shadow: inset 0 1px rgba(255,255,255, .4), inset 1px 0 rgba(255,255,255, .1), inset -1px 0 rgba(255,255,255, .1);
+}
+.tabelBtn.icon{
+    height: 20px;     
+    border: 1px solid navy;
+}
+.tabelBtn.text{
+    color: white; 
+    width: 65px; 
+    height: 20px; 
+    font-size: 12pt; 
+    font-family: geneva, arial;
+    border-radius: 0px 0px 12.5px 0px;     
+    border: 1px solid navy;
+    font-weight: bold;
+}
+
+#printBtn{    
+    cursor: pointer;
+    background: darkcyan;
+}
+#printBtn:hover{
+    background: darkturquoise;
+}
+#printLbl{
+    font-size: 12pt;
+    font-family: verdana;
+    color: darkcyan;
+    margin-left: 5px;
+}
+
+#xlsBtn{
+    cursor: pointer;
+    background: darkgreen;
+}
+#xlsBtn:hover{
+    background: #22AA22;
+}
+#xlsLbl{
+    font-size: 12pt;
+    font-family: verdana;
+    color: darkgreen;
+    margin-left: 5px;
+}
+
+#csvBtn{
+    cursor: pointer;
+    background: navy;
+}
+#csvBtn:hover{
+    background: blue;
+}
+#csvLbl{
+    font-size: 12pt;
+    font-family: verdana;
+    color: navy;
+    margin-left: 5px;
+}
+
+#xmlBtn{
+    cursor: pointer;
+    background: darkorange;
+}
+#xmlBtn:hover{
+    background: goldenrod;
+}
+#xmlLbl{
+    font-size: 12pt;
+    font-family: verdana;
+    color: darkorange;
+    margin-left: 5px;
+}
+
+#pdfBtn{
+    cursor: pointer;
+    background: darkred;
+}
+#pdfBtn:hover{
+    background: crimson;
+}
+#pdfLbl{
+    font-size: 12pt;
+    font-family: verdana;
+    color: darkred;
+    margin-left: 5px;
+}
+
+/*#xml, #csv, #excels, #pdf, #cetak{
+    width: 62px;
+    font-size: 8pt;
+    font-family: Lucida Console;
+    margin-bottom: 5px;
+
+    padding: 3px 5px 3px 5px;
+
+    border: 1px solid #ECECEC;
+    background: #06518A;
+    color: #ffffff;
+
+    -webkit-border-radius: 5px;  
+    -moz-border-radius: 5px;  
+    border-radius: 5px;
+}
+
+#excels{
+    background: darkgreen;
+}
+#excels:hover{
+    background: #22AA22;
+}
+
+#csv{
+    background: navy;
+}
+#csv:hover{
+    background: blue;
+}
+
+#xml{
+    background: orangered;
+}
+#xml:hover{
+    background: darkorange;
+}
+
+#json{
+    background: goldenrod;
+}
+#json:hover{
+    background: gold;
+}
+
+#pdf{
+    background: darkred;
+}
+#pdf:hover{
+    background: crimson;
+}
+#cetak{
+    background: darkcyan;
+}
+#cetak:hover{
+    background: darkturquoise;
+}
+#excels:disabled, #pdf:disabled,  #csv:disabled, #xml:disabled, #cetak:disabled{
+    background: none repeat scroll 0% 0% #DDD;
+}*/
+/*====css download button=======*/
+
+/*======initial css table output =======*/
+.tabel_hasil{    
+    margin: 0px auto;
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+
+#jqOutterDivLeft, #jqOutterDivRight{
+    vertical-align:top;
+    position:relative;
+    display:inline-block;
+}
+#jqOutterDivRight {
+    overflow-x:hidden;  
+}
+#jqInnerDivLeft{
+    overflow:hidden;    
+}
+#jqInnerDivRight{
+    overflow:auto;    
+    max-height:300px;
+    /*max-width: 950px;*/
+}
+#jqRightHeader{
+    overflow:hidden;
+}
+/*======initial css table output =======*/
+
+/*=======initial sub-part table output*/
+.datas{
+    min-width:90px;
+    /*text-align: right;*/
+    font-size: 9pt;
+    padding: 2px;
+    padding-left: 10px;
+    height: 20px;
+    /*border-spacing: 0px 1px 0px 0px;*/
+    /*    border: thin solid blue;*/
+}
+#th1, #th2a{
+    font-size: 9pt;         
+    max-width: 102px;
+    min-width: 100px;
+    padding:1px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+#th2b{
+    font-size: 9pt;         
+    max-width: 200px;
+    min-width: 200px;
+    padding:0px;
+    padding-left: 5px;    
+}
+#th3{
+    min-width: 60px;
+    height: 20px;
+    text-align: center;	
+    font-size: 9pt;
+}
+#th4{
+    max-width: 200px;
+    min-width: 200px;
+    font-size: 9pt;
+    text-align: left;
+    vertical-align: central;
+    padding: 2px;
+    padding-right: 0px;
+    padding-left: 5px;
+    height: 20px;
+}
+#th1,#th2a,#th2b{
+    text-align: center;
+}
+#tableLeftUp, #tableLeftBottom, #tableRightUp, #tableRightBottom{
+    border-collapse: separate;
+    border-spacing: 2px;
+    margin-bottom:0px;
+    vertical-align: middle;
+}
+/*=======initial sub-part table output*/

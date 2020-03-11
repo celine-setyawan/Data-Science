@@ -1,0 +1,287 @@
+ /* 
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+window.onload = onLoad();
+
+function onLoad() {
+    getLinkId();
+}
+/*
+digunakan untuk menampilkan tabel dinamis
+ */
+function getLinkId(){
+    linkId = $('#link_id').html();
+    $.post('/mod/params/returnParams.php', {idLink: linkId}, function(data, status){
+        if(status === 'success'){
+            var url = "";
+            var data = JSON.parse(data);
+            layoutVar = data[3];
+            $.post('/mod/Layout/variabelView.php', {
+                valueDataSelect: data[7],
+                wilayahDataSelect: data[9],
+                keteranganDataSelect: data[8],
+                kirim: '3',
+                layout: layoutVar
+            }, function(data, status) {
+                $("#judulTabelInd").html(data[4]);
+                $("#judulTabelEng").html(data[5]);
+                $("#isi").html(data);
+
+                $("#judulTabelEng2").html("");
+                $("#hasilView2").html("");
+                setContent();
+                setWidthHeight();
+                setTimeout(function(){
+                    $('#outputContent').show();  
+                }, 1000);
+            });
+        }else{
+            console.log('gagal return params');
+        }
+    });
+}
+
+function getIsi() {
+    url = $("#alamat").html();
+    $.post(url, {kirim: 2}, function(data, status) {
+        if (status === "success") {
+            $('#isi').html(data);
+            $('#content table:nth-of-type(1) input').attr('disabled', false);
+            setContent();
+            setTimeout(function(){
+              $('#outputContent').show();  
+            }, 1000);
+//            setWidthHeight();
+        }
+    });
+}
+
+function setContent() {
+    $('#th1, #th2a, #th2b').css({
+        'background-color': '#002142',
+        'color': 'white'
+    });
+    $('#tableLeftBottom tr:nth-child(even) #th4, #tableRightBottom tr:nth-child(even) .datas').css({
+        'background-color': 'gray',
+        'color': 'white'
+    });
+
+    $('.datas').css({
+        'vertical-align': 'central',
+        'text-align': 'right'
+    });
+
+    nTabel_hasil = $('.tabel_hasil').length;
+    //console.log(nTabel_hasil);
+    for (index = 1; index <= nTabel_hasil; index++) {
+        x = "table.tabel_hasil:nth-of-type(" + index + ") ";
+
+        //initialize all id into xs variable
+        x1 = x + " #jqOutterDivLeft ";
+        x1A = x + " #jqLeftHeader ";
+        x1Aa = x + " #tableLeftUp ";
+        x1B = x + " #jqInnerDivLeft ";
+        x1Bb = x + " #tableLeftBottom ";
+
+        x2 = x + " #jqOutterDivRight ";
+        x2A = x + " #jqRightHeader ";
+        x2Aa = x + " #tableRightUp ";
+        x2B = x + " #jqInnerDivRight ";
+        x2Bb = x + " #tableRightBottom ";
+
+//        $(x2B).css('max-width', '850px');
+        $(x2B).css('max-width', $('#isi').width() - 230);
+
+        x2Aa_detail1 = x2Aa + " tr:nth-last-child(1) ";
+        if ($(x2Aa_detail1).html() === "") {
+            $(x2Aa_detail1).remove();
+        }
+
+        x1A_detail1 = x1A + " #th2b ";
+        x2A_detail1 = x2Aa + " tbody ";
+        x2ATr = x2A_detail1 + ' tr';
+        for (i = 0; i < $(x2ATr).length; i++) {
+            x2ATrI = x2ATr + ':nth-child(' + (i + 1) + ')';
+            x2ATrTh = x2ATr + ':nth-child(' + i + ') #th1';
+            if ($(x2ATrI).html() === "") {
+                $(x2ATrTh).attr("rowspan", "1");
+                $(x2ATrI).remove();
+            }
+            if (i === $(x2ATr).length - 1) {
+                x2ATrTh2 = x2ATr + ':nth-child(' + (i + 1) + ') #th1';
+                $(x2ATrTh2).attr("rowspan", "1");
+            }
+        }
+        //$('#th2b').attr('rowspan', $(x2ATr).length);
+
+        x2ATr_height = 0;
+        x2ATr_count = 0;
+        for (i = 0; i < $(x2ATr).length; i++) {
+            x2ATrI = x2ATr + ':nth-child(' + (i + 1) + ')';
+            x2ATrI_height = $(x2ATrI).height();
+            x2ATr_height += x2ATrI_height;
+            x2ATr_count++;
+        }
+        //console.log(x2ATr_count);
+        //console.log(x2ATr_height);
+        $(x1A_detail1).height(x2ATr_height + (x2ATr_count - 1) * 2);
+
+        x1Aa_detail1 = x1Aa + " #th2b ";
+        x1Bb_detail1 = x1Bb + " #th4 ";
+        $(x1Aa_detail1).css('min-width', $(x1Bb_detail1).width());
+
+        x1Aa_height = $(x1Aa).height();
+        x2Aa_height = $(x2Aa).height();
+        if (x1Aa_height > x2Aa_height) {
+            $(x2Aa).height(x1Aa_height);
+            $(x1Aa).height(x1Aa_height);
+        } else if (x1Aa_height < x2Aa_height) {
+            $(x1Aa).height(x2Aa_height);
+            $(x2Aa).height(x2Aa_height);
+        } else if (x1Aa_height === x2Aa_height) {
+            $(x1Aa).height(x1Aa_height);
+            $(x2Aa).height(x2Aa_height);
+        }
+
+        x2Bb_detail1 = x2Bb + "  tr:last-child td ";
+        for (var i = 0; i < $(x2Bb_detail1).length; i++) {
+            temp1 = x2Aa + " tr:last-child th:nth-child( " + (i + 1) + ")";
+            temp2 = x2Bb + " tr:first-child td:nth-child( " + (i + 1) + ")";
+            //$(temp1).css('min-width', $(temp2).width() + 10);
+            //$(temp1).css('max-width', $(temp2).width() + 10);
+            $(temp1).css('width', $(temp2).width() + 10);
+        }
+
+        for (var j = 0; j < $('#tableLeftBottom tr').length; j++) {
+            temp3 = x1Bb + " tr:nth-child(" + (j + 1) + ") td";
+            temp4 = x2Bb + " tr:nth-child(" + (j + 1) + ") td";
+            if ($(temp3).height() > $(temp4).height()) {
+//                $(temp4).css('min-height', $(temp3).height());
+//                $(temp4).css('max-height', $(temp3).height());
+                $(temp4).height($(temp3).height());
+                $(temp3).height($(temp3).height());
+            } else if ($(temp3).height() < $(temp4).height()) {
+//                $(temp3).css('min-height', $(temp4).height());
+//                $(temp3).css('max-height', $(temp4).height());
+                $(temp3).height($(temp4).height());
+                $(temp4).height($(temp4).height());
+            } else {
+                $(temp4).height($(temp4).height() + 4);
+                $(temp3).height($(temp3).height() + 4);
+            }
+        }
+
+
+        /*synch vertical-horizontal*/
+        a = $(x2B).css('max-width');
+
+        if ($(x2B).height() < 300) {
+            $(x1B).height($(x2B).height());
+            if ($(x2B).css('width') <= a) {
+                $(x2A).width($(x2B).width());
+            }
+        } else {
+            $(x1B).height($(x2B).height() - 15);
+            if ($(x2B).css('width') < a | $(x2B).css('width') === '96px') {
+                $(x2B).css('overflow-x', 'hidden');
+                $(x1B).height($(x2B).height());
+                $(x2A).width($(x2B).width() + 15);
+            } else {
+                $(x2A).width($(x2B).width() - 17);
+                $(x1B).height($(x2B).height() - 17);
+            }
+        }
+        /*synch vertical-horizontal*/
+
+        $(x1).height($(x2).height());
+
+        z1 = x1Aa + ' #th2b';
+        z2 = x2Aa + ' tr';
+        z2Length = $(z2).length;
+        $(z1).attr('rowspan', z2Length);
+
+        /*add scroll to inline*/
+        $(x2B).attr("onscroll", "scrolling(" + index + ")");
+        /*add scroll to inline*/
+
+        /*$(window).resize(function() {
+            $(x2B).css('max-width', $('#isi').width() - 230);
+            a = $(x2B).css('max-width');
+            if ($(x2B).height() < 300) {
+                $(x1B).height($(x2B).height());
+                if ($(x2B).css('width') <= a) {
+                    $(x2A).width($(x2B).width());
+                }                
+            } else {
+                $(x1B).height($(x2B).height() - 15);                                
+                if ($(x2B).css('width') < a | $(x2B).css('width') === '96px') {
+                    $(x2B).css('overflow-x', 'hidden');
+                    $(x1B).height($(x2B).height());
+                    $(x2A).width($(x2B).width() + 15);
+                } else {                    
+                    $(x2A).width($(x2B).width() - 17);
+                    $(x1B).height($(x2B).height() - 17);
+                }
+            }
+        });*/
+    }
+}
+
+function scrolling(idx) {
+//    console.log(idx);    
+    y = "table.tabel_hasil:nth-of-type(" + idx + ") ";
+    y0 = y + " #jqInnerDivRight";
+    y1 = y + " #jqInnerDivLeft";
+    y2 = y + " #jqRightHeader";
+
+    $(y1).scrollTop($(y0).scrollTop());
+    $(y2).scrollLeft($(y0).scrollLeft());
+}
+
+function setWidthHeight() {
+    nTH = $('#isi table.tabel_hasil').length;
+    for (h = 0; h < nTH; h++) {
+        init = 'table.tabel_hasil:nth-child(' + (h + 1) + ')';
+
+        th2b = init + ' #th2b';
+        $(th2b).css('width', $(th2b).css('width'));
+        $(th2b).css('height', $(th2b).css('height') + 2);
+        $(th2b).css('vertical-align', 'middle');
+
+        tlb = init + ' #tableLeftBottom tr';
+        for (i = 0; i < $(tlb).length; i++) {
+            temp = init + ' #tableLeftBottom tr:nth-child(' + (i + 1) + ') td ';
+            $(temp).css('width', $(temp).css('width'));
+            $(temp).css('vertical-align', 'middle');
+            //$(temp).css('height', $(temp).css('height'));
+        }
+
+        tru = init + ' #tableRightUp tr';
+        for (i = 0; i < $(tru).length; i++) {
+            temp = init + ' #tableRightUp tr:nth-child(' + (i + 1) + ') th';
+            for (j = 0; j < $(temp).length; j++) {
+                temp2 = temp + ':nth-child(' + (j + 1) + ')';
+                $(temp2).css('width', $(temp2).css('width'));
+                $(temp2).css('height', $(temp2).css('height'));
+                $(temp2).css('vertical-align', 'middle');
+//                console.log('height:' + $(temp2).height());
+//                console.log('innerHeight:' + $(temp2).innerHeight());
+//                console.log('outerHeightTrue:' + $(temp2).outerHeight(true));
+//                console.log('outerHeightFalse:' + $(temp2).outerHeight(false));
+            }
+        }
+
+        trb = init + ' #tableRightBottom tr';
+        for (i = 0; i < $(trb).length; i++) {
+            temp = init + ' #tableRightBottom tr:nth-child(' + (i + 1) + ') td';
+            for (j = 0; j < $(temp).length; j++) {
+                temp2 = temp + ':nth-child(' + (j + 1) + ')';
+                $(temp2).css('width', $(temp2).css('width'));
+                $(temp2).css('vertical-align', 'middle');
+                //$(temp2).css('height', $(temp2).css('height') + 2);
+            }
+        }
+    }  
+}

@@ -1,0 +1,25 @@
+@media screen and (min-width:150px) and (max-width:599px){#sidebar, #sidebar .linked-banner-button,.menubawah, .logo, #topbar .breadcrumbs{display:none;}
+#content{width:100%;margin-top:0px;}
+#column2{width:98%;}
+#column2.kolom-non-index{border:1px solid #DDD;padding:15px 2% 5px;}
+#column2 h4.judulberita{margin:0px 0px 20px 0px;font-size:0.9em;font-family:Geneva, Arial;color:#00497d;font-weight:bold;}
+#sb-site{min-height:450px !important;height:auto;}
+#topbar{margin:0px 0px 0px 0px;}
+#topbar #data-sensus{width:50%;margin-top:-5px;}
+#topbar #data-sensus table{width:auto !important;margin:auto 2% auto auto;}
+#topbar #data-sensus #list-sensus ul{top:90px !important;}
+#widget-banner-sensus .linked-banner-button{width:60% !important;}
+footer .row{line-height:12px !important;}
+table tr td.thumbnail-keterangan-publikasi div.nomor-identitas,
+table tr td.thumbnail-keterangan-publikasi span.thumbnail-abstrak-publikasi{display:none;}
+#column2 .list-view table tr td.thumbnail-sampul-publikasi img{margin-top:2px !important;margin-bottom:2px !important;width:90% !important;height:100px !important;}
+#column2 .list-view table tr td .tombol-detail-publikasi-phone{display:block !important;}
+#column2 .list-view table tr td.thumbnail-sampul-publikasi .tombol-publikasi-phone{display:none !important;}
+.thumbnail-judul-publikasi{font-size:1em !important;vertical-align:middle !important;display:block !important;}
+#brs-grid table tr td.tanggal-rilis{font-size:0.95em !important;}
+#column2 .search-form table tr td.label-pencarian-brs{display:none !important;}
+#column2 .search-form table tr td.input-pencarian-brs{width:100% !important;}
+#column2 .search-form table tr td.input-pencarian-brs select{width:100% !important;margin-bottom:10px !important;}
+#column2>.simpleTabs{display:none !important;}
+div#accordion-smartphone ul li div.responsive-accordion-panel img{width:100% !important;height:auto !important;}
+}

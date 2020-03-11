@@ -1,0 +1,52 @@
+ var showTabel = (function() {
+    return function() {
+        window.open("resultTab", '_self');
+    };
+})();
+ var showTabel2 = (function() {
+    return function() {
+        linkId = $('#link_id').html();
+        //console.log(linkId);
+        url="../../../linkTableDinamis/view/id/"+linkId;
+        window.open(url, '_self');
+    };
+})();
+var showChart2 = (function() {
+    return function() {
+        linkId = $('#link_id').html();
+        param1 = $('#param1').html();
+        param2 = $('#param2').html();
+        $.post('../../../mod/chartData/chartParams.php', {
+            param1: param1,
+            param2: param2,
+            kirim: '1'
+        }, function(data, status) {
+            if (status === 'success') {
+                window.open("../../chart/id/"+linkId, '_self');
+            }
+        });
+
+    };
+})();
+
+var showChart = (function() {
+    return function() {
+        param1 = $('#param1').html();
+        param2 = $('#param2').html();
+        $.post('../mod/chartData/chartParams.php', {
+            param1: param1,
+            param2: param2,
+            kirim: '1'
+        }, function(data, status) {
+            if (status === 'success') {
+                window.open("chartResultTab", '_self');
+            }
+        });
+
+    };
+})();
+var showMap = (function() {
+    return function() {
+    };
+})();
+                            

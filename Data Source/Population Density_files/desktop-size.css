@@ -1,0 +1,10 @@
+@media screen and (min-width:890px){.navbar{height:120px;background:url("mobile/bg_header2.gif") repeat-x;background-size:2px 100%;}
+#logo_mini{display:none;}
+.navbar .sb-toggle-left{display:none;}
+#nondesktop_floating_search_trigger,.mini-language{display:none;}
+.navbar-left{float:none !important;}
+#topbar{margin:39px 10px 0px 20px;}
+#content{margin:0px 0% 20px 0%;}
+#sb-site{min-height:800px !important;height:auto;}
+#topbar #data-sensus{width:20%;}
+}

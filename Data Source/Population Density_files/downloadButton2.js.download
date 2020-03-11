@@ -1,0 +1,242 @@
+/* 
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+/*
+ * 
+ * modified by hanif
+ */
+
+function showUnduhMenu() {
+    $('#showUnduhMenu').slideToggle('1000');
+}
+
+var tableToExcel = (function() {    
+    var uri = 'data:application/vnd.ms-excel;base64,'
+            , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+            , base64 = function(s) {
+                return window.btoa(unescape(encodeURIComponent(s)))
+            }
+    , format = function(s, c) {
+        return s.replace(/{(\w+)}/g, function(m, p) {
+            return c[p];
+        });
+    };
+    return function() {
+        table = '.tabel_hasil';
+        name = 'table';
+        filename = 'bps-file.xls';
+        nTabel_hasil = $('.tabel_hasil').length;
+        tables = [nTabel_hasil];
+        if (!table.nodeType) {
+	    /*for (i = 1; i <= (nTabel_hasil); i++) {
+                temp0 = table + ":nth-of-type(" + i + ")";
+                temp1 = $(document).find(temp0).html();
+                regex = RegExp("background-color: gray; color: white;", "g");
+                temp1 = temp1.replace(regex, "background-color: #d4d4d4; color: black;");
+                temp2 = '<table class="tabel_hasil" cellpadding="0" cellspacing="0" align="center">' + temp1 + '</table>';
+                tables[i - 1] = temp2;
+            }*/
+            for(i = 1; i <= (nTabel_hasil); i++){
+                temp0 = table + ":nth-of-type(" + i + ")";
+                temp1 = $(document).find(temp0).html();
+                temp2 = temp0 +' #tableRightBottom tr';
+                dataTr = $(temp2).length;
+                for(j=1; j<= dataTr; j++){
+                    temp3 = temp2+ ':nth-child('+j+') td';
+                    dataTrTd = $(temp3).length;
+                    for(k=1; k<= dataTrTd;k++){
+                        temp4 = temp3 + ':nth-child('+k+')';
+                        dataTrTdI = $(temp4).html();
+                        dataTrTdI = dataTrTdI.replace(/\s+/g, '');
+                        $(temp4).html(dataTrTdI);
+                    }                    
+                }
+                temp5 = $(document).find(temp0).html();
+                regex = RegExp("background-color: gray; color: white;", "g");
+                temp5 = temp5.replace(regex, "background-color: #d4d4d4; color: black;");
+                temp5 = '<table class="tabel_hasil" cellpadding="0" cellspacing="0" align="center">' + temp5 + '</table>';
+                tables[i - 1] = temp5;
+                 $(document).find(temp0).html(temp1);
+            }
+        }
+//        console.log(tables.length);
+        var ctx = {worksheet: name || 'Worksheet', table: tables};
+        //console.log(format(template, ctx));
+
+        document.getElementById("dlink").href = uri + base64(format(template, ctx));
+        document.getElementById("dlink").download = filename;
+        document.getElementById("dlink").click();
+
+    };
+})();
+
+var tableToCSV = (function() {
+    return function() {
+        verticalList = $('#param1').html();
+        variableList = $('#param2').html();
+        
+        verticalList = jQuery.parseJSON(verticalList);
+        variableList = jQuery.parseJSON(variableList);               
+        
+        $.post('../../../mod/exportData/exportCSV.php', {
+            verticalList: verticalList,
+            variableList: variableList,
+            kirimParamCSV: true,
+        }, function(data, status) {
+            if (status === 'success') {
+                window.open("../../../mod/exportData/exportCSV.php", '_blank');
+            }
+        });
+
+    };
+})();
+
+var tableToXML = (function() {
+    return function() {
+        verticalList = $('#param1').html();
+        variableList = $('#param2').html();
+
+        verticalList = jQuery.parseJSON(verticalList);
+        variableList = jQuery.parseJSON(variableList);       
+        
+        $.post('../../../mod/exportData/exportXML.php', {
+            verticalList: verticalList,
+            variableList: variableList,
+            kirimParamXML: true,
+        }, function(data, status) {
+            if (status === 'success') {
+                window.open("../../../mod/exportData/exportXML.php", '_blank');
+            }
+        });
+
+    };
+})();
+
+var tableToPDF = (function() {
+    return function() {
+        judulTabel = '<div style="font-size:20pt;margin-bottom:10pt; text-align: center;" >Output Tabel Dinamis</div>';
+        nTabel_hasil = $('.tabel_hasil').length;
+        leftHeader = [];
+        firstRightHeader = [];        
+        restRightHeader = [];
+        innerDiv = [];
+        tabel_hasil = [4];
+
+        for (n = 0; n < nTabel_hasil; n++) {
+            def = ".tabel_hasil:nth-of-type(" + (n + 1) + ")";
+
+            n1 = def + ' #tableLeftUp tbody tr';
+            leftHeader[n] = $(n1).html();
+            
+            n2 = def + ' #tableRightUp tbody tr:nth-child(1) ';            
+            firstRightHeader[n] = $(n2).html();
+            
+            n3 = def + ' #tableRightUp tbody tr';
+            if($(n3).length>0){
+                n3a ='';
+                for(i=0;i<$(n3).length-1;i++){
+                    n3b = n3+':nth-child('+(i+2)+')';
+                    n3a += '<tr>'+$(n3b).html()+'</tr>';
+                }                
+                restRightHeader[n] = n3a;
+            }else{
+                restRightHeader[n] = '';
+            }
+            
+            n4 = def + ' #tableLeftBottom tbody tr';
+            n4Length = $(n4).length;
+            n5 = def + ' #tableRightBottom tbody tr';
+            n5Length = $(n5).length;
+            n45 = '';
+            for(i=0; i<n4Length; i++){
+                n4a = n4+':nth-child('+(i+1)+')';
+                n5a = n5+':nth-child('+(i+1)+')';
+                n45 += '<tr>'+$(n4a).html()+$(n5a).html()+'</tr>';
+            }
+            innerDiv[n] = n45;
+        }
+
+        tabel_hasil[0] = leftHeader;
+        tabel_hasil[1] = firstRightHeader;
+        tabel_hasil[2] = restRightHeader;
+        tabel_hasil[3] = innerDiv;
+        $.post("../../../mod/exportData/exportPDF.php", {
+            judulTabel: judulTabel,
+            tabel_hasil: tabel_hasil,
+            kirim: true
+        }, function(data, status) {
+            if (status === "success") {
+                console.log(data);
+                window.open("../../../mod/exportData/exportPDF.php", '_blank');
+            } else {
+                console.log('lho');
+            }
+        });
+
+    };
+})();
+
+var cetak = (function() {
+    return function() {
+        judulTabel = '<div style="font-size:20pt;margin-bottom:10pt; text-align: center;" >Output Tabel Dinamis</div>';
+        nTabel_hasil = $('.tabel_hasil').length;
+        leftHeader = [];
+        firstRightHeader = [];        
+        restRightHeader = [];
+        innerDiv = [];
+        tabel_hasil = [4];
+
+        for (n = 0; n < nTabel_hasil; n++) {
+            def = ".tabel_hasil:nth-of-type(" + (n + 1) + ")";
+
+            n1 = def + ' #tableLeftUp tbody tr';
+            leftHeader[n] = $(n1).html();
+            
+            n2 = def + ' #tableRightUp tbody tr:nth-child(1) ';            
+            firstRightHeader[n] = $(n2).html();
+            
+            n3 = def + ' #tableRightUp tbody tr';
+            if($(n3).length>0){
+                n3a ='';
+                for(i=0;i<$(n3).length-1;i++){
+                    n3b = n3+':nth-child('+(i+2)+')';
+                    n3a += '<tr>'+$(n3b).html()+'</tr>';
+                }                
+                restRightHeader[n] = n3a;
+            }else{
+                restRightHeader[n] = '';
+            }
+            
+            n4 = def + ' #tableLeftBottom tbody tr';
+            n4Length = $(n4).length;
+            n5 = def + ' #tableRightBottom tbody tr';
+            n5Length = $(n5).length;
+            n45 = '';
+            for(i=0; i<n4Length; i++){
+                n4a = n4+':nth-child('+(i+1)+')';
+                n5a = n5+':nth-child('+(i+1)+')';
+                n45 += '<tr>'+$(n4a).html()+$(n5a).html()+'</tr>';
+            }
+            innerDiv[n] = n45;
+        }
+
+        tabel_hasil[0] = leftHeader;
+        tabel_hasil[1] = firstRightHeader;
+        tabel_hasil[2] = restRightHeader;
+        tabel_hasil[3] = innerDiv;
+
+        $.post("../../../mod/exportData/cetak.php", {
+            judulTabel: judulTabel,
+            tabel_hasil: tabel_hasil,
+            kirim: true
+        }, function(data, status) {
+            if (status === "success") {
+//                console.log(data);
+                window.open("../../../mod/exportData/cetak.php", '_blank');
+            } else {
+                console.log('lho');
+            }
+        });
+    };
+})();
